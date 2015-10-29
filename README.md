@@ -1,14 +1,11 @@
 #Complete Spice Web Client written in HTML5 and Javascript 
+Full and complete implementation of the SPICE protocol (by Red Hat) written in HTML5 and JavaScript. It allows any standard HTML5-ready Web Browser to connect to remote 
+virtual sessions just by accessing a single URL.
 
-This is a full and complete implementation of the SPICE protocol (red hat)  written in HTML5 and javascript.
+The client can be deployed through a normal web server to connect to spice sessions. To use it you would need to proxy your spice session through a websockets-to-tcp 
+proxy like Kanaka, Websockify or similar projects.
 
-It allows any standard web browser with HTML5 support to connect to remote virtual sessions just by browsing to a webpage.
-
-It is not based on the interesting but very limited spice-html5 prototype.
-
-You can use this client, served through a normal web server to connect to spice sessions. 
-To use it you would need to proxy your spice session through a websockets-to-tcp proxy like
-kanaka websockify or similar projects.
+NOTE: This project is NOT based on the spice-html5 prototype.
 
 ## Features
 
