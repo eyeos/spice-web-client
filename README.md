@@ -41,8 +41,8 @@ We have made tests in raspberry pi 2 with very good results.
 
 ##Network requirements
 
-Only Binary websockets are used to send and receive server data, so you should expect similar nework requirements than SPICE itself.
-for a normal 1080p session the performance is very good up to 150-200ms of latency and 100kb/s bandwitch.
+Only Binary websockets are used to send and receive server data, so you should expect similar network requirements than SPICE itself.
+for a normal 1080p session the performance is very good up to 150-200ms of latency and 100kb/s bandwidth.
 
 The network consumption of a spice session depends a lot on the usage patterns.    
 
