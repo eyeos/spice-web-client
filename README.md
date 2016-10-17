@@ -95,5 +95,5 @@ For more information about the implementation or questions about roadmap etc con
 
 ##License
 
-Spice Web Client is distributed under [GNU Affero GPL3 license](http://www.gnu.org/licenses/agpl-3.0.en.html).
+Spice Web Client is distributed under the terms of the [MIT license](https://opensource.org/licenses/MIT).
 
