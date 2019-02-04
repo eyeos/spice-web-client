@@ -198,7 +198,7 @@ function start () {
 		$(params.canvas).css({
 				'top': '0px',
 				'left': params.info.left + 'px'
-		});
+			});
 	});
 
 	var useWorkers = true;
