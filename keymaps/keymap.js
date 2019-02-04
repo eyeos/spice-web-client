@@ -7,7 +7,7 @@ wdi.Keymap = {
     ctrlKeymap: {},
     charmap: {},
     ctrlPressed: false,
-    twoBytesScanCodes: [0x5B, 0xDB, /*0x38, 0xB8,*/ 0x5C, 0xDC, 0x1D, 0x9D, 0x5D, 0xDD, 0x52, 0xD2, 0x53, 0xD3, 0x4B, 0xCB, 0x47, 0xC9, 0x4F, 0xCF, 0x48, 0xC8, 0x50, 0xD0, 0x49, 0xC9, 0x51, 0xD1, 0x4D, 0xCD, 0x1C, 0x9C],
+	twoBytesScanCodes: [0x5B, 0xDB, 0x1C, 0x5C, 0xDC, 0x1D, 0x9D, 0x5D, 0xDD, 0x52, 0xD2, 0x53, 0xD3, 0x4B, 0xCB, 0x47, 0xC9, 0x4F, 0xCF, 0x48, 0xC8, 0x50, 0xD0, 0x49, 0xC9, 0x51, 0xD1, 0x4D, 0xCD, 0x1C, 0x9C],
 
     loadKeyMap: function(layout) {
         try {
@@ -16,10 +16,10 @@ wdi.Keymap = {
             this.reservedCtrlKeymap =  wdi['Keymap' + layout.toUpperCase()].getReservedCtrlKeymap();
             this.charmap = wdi['Keymap' + layout.toUpperCase()].getCharmap();
         } catch(e) {
-			this.keymap = wdi.KeymapES.getKeymap();
-            this.ctrlKeymap = wdi.KeymapES.getCtrlKeymap();
-            this.reservedCtrlKeymap =  wdi.KeymapES.getReservedCtrlKeymap();
-            this.charmap = wdi.KeymapES.getCharmap();
+			this.keymap = wdi.KeymapUS.getKeymap();
+			this.ctrlKeymap = wdi.KeymapUS.getCtrlKeymap();
+			this.reservedCtrlKeymap =  wdi.KeymapUS.getReservedCtrlKeymap();
+			this.charmap = wdi.KeymapUS.getCharmap();
 		}
     },
 
@@ -27,6 +27,29 @@ wdi.Keymap = {
         if (this.keymap[keycode] === undefined) return false;
         else return true;
     },
+	checkExceptions: function(type, keyCode) {
+
+		switch (keyCode) {
+			case 226: // ABNT-2 interrogation + slash
+				if (type == "keydown") {
+					return [0x35, 0, 0];
+				} else { 
+					return [0xB5, 0, 0];
+				}
+				break;
+
+			case 111: // OEM2
+				return this.makeKeyMap(0x94);
+				break;
+			case 191: // KP_DIVIDE
+				return this.makeKeyMap(0x35);
+					break;
+			default:
+				return [];
+			break;
+		}
+
+	},
 
     /**
      * Returns the associated spice key code from the given browser keyboard event
@@ -43,6 +66,7 @@ wdi.Keymap = {
         } else if (this.handledByNormalKeyCode(e['type'], e['keyCode'])) {
             return this.getScanCodeFromKeyCode(e['keyCode'], e['type'], this.keymap);
         } else {
+			this.checkExceptions(e['type'], e['keyCode']);
             return [];
         }
     },
@@ -50,12 +74,14 @@ wdi.Keymap = {
     getScanCodeFromKeyCode: function(keyCode, type, keymap, additionalKeymap) {
         this.controlPressed(keyCode, type);
         var key = null;
+
         if(keyCode in keymap) {
             key = keymap[keyCode];
         } else {
             key = additionalKeymap[keyCode];
         }
         if (key === undefined) return [];
+
         if (key < 0x100) {
             if (type == 'keydown') {
                 return [this.makeKeymap(key)];

@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <!--
 
-eyeOS Spice Web Client
-Copyright (c) 2015 eyeOS S.L.
+	eyeOS Spice Web Client
+	Copyright (c) 2015 eyeOS S.L.
 
-Contact Jose Carlos Norte (jose@eyeos.com) for more information about this software.
+	Contact Jose Carlos Norte (jose@eyeos.com) for more information about this software.
 
-This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Affero General Public License version 3 as published by the
-Free Software Foundation.
- 
-This program is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
-details.
- 
-You should have received a copy of the GNU Affero General Public License
-version 3 along with this program in the file "LICENSE".  If not, see 
-<http://www.gnu.org/licenses/agpl-3.0.txt>.
- 
-See www.eyeos.org for more details. All requests should be sent to licensing@eyeos.org
- 
-The interactive user interfaces in modified source and object code versions
-of this program must display Appropriate Legal Notices, as required under
-Section 5 of the GNU Affero General Public License version 3.
- 
-In accordance with Section 7(b) of the GNU Affero General Public License version 3,
-these Appropriate Legal Notices must retain the display of the "Powered by
-eyeos" logo and retain the original copyright notice. If the display of the 
-logo is not reasonably feasible for technical reasons, the Appropriate Legal Notices
-must display the words "Powered by eyeos" and retain the original copyright notice. 
+	This program is free software; you can redistribute it and/or modify it under
+	the terms of the GNU Affero General Public License version 3 as published by the
+	Free Software Foundation.
+
+	This program is distributed in the hope that it will be useful, but WITHOUT
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+	details.
+
+	You should have received a copy of the GNU Affero General Public License
+	version 3 along with this program in the file "LICENSE".  If not, see 
+	<http://www.gnu.org/licenses/agpl-3.0.txt>.
+
+	See www.eyeos.org for more details. All requests should be sent to licensing@eyeos.org
+
+	The interactive user interfaces in modified source and object code versions
+	of this program must display Appropriate Legal Notices, as required under
+	Section 5 of the GNU Affero General Public License version 3.
+
+	In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+	these Appropriate Legal Notices must retain the display of the "Powered by
+	eyeos" logo and retain the original copyright notice. If the display of the 
+	logo is not reasonably feasible for technical reasons, the Appropriate Legal Notices
+	must display the words "Powered by eyeos" and retain the original copyright notice. 
 
 -->
 <html>
@@ -117,18 +117,22 @@ must display the words "Powered by eyeos" and retain the original copyright noti
         <script src="keymaps/keymapes.js"></script>
         <script src="keymaps/keymapit.js"></script>
         <script src="keymaps/keymapus.js"></script>
+		<script src="keymaps/keymapptbr.js"></script>
         <script src="keymaps/keymap.js"></script>
         <script src="application/WorkerProcess.js"></script>
         <script src="run.js"></script>
+		<script src="lib/sendkey.js"></script>
         <!-- end core -->
         <meta content="yes" name="apple-mobile-web-app-capable" />
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
         <style type="text/css">
-            body {
+body {
                 background-color:black;
                 padding:0;
                 margin:0;
-            }
+}
 
             #integrationBenchmark {
                 display: none;
@@ -167,6 +171,48 @@ must display the words "Powered by eyeos" and retain the original copyright noti
                 top:50%;
             }
 
+	    .dropdown {
+		    position: absolute;
+		    display: inline-block;
+	    }
+
+	    #shortcuts.dropdown {
+	            bottom:0px;
+	            left:180px;
+	    }
+
+	    #layouts.dropdown {
+	            bottom:0px;
+	            left:0px;
+	     }
+
+	    .dropdown-content {
+		    display: none;
+		    position: absolute;
+		    background-color: #f9f9f9;
+		    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		    padding: 2px 2px;
+		    z-index: 1;
+		    background-color: #f1f1f1;
+		    border: 1px solid #d3d3d3;
+		    text-align: left;
+	    }
+	    .dropdown:hover .dropdown-content {
+		    display: block;
+	            bottom:100%;
+	    }
+
+	    #shortcuts.dropdown:hover #shortcuts.dropdown-content {
+	            left: -20%;
+		    min-width: 120px;
+	    }
+
+	    #layouts.dropdown:hover #layouts.dropdown-content {
+		    left: -50%;
+		    min-width: 80px;
+	    }
+
+	    
         </style>
     </head>
     <body>
@@ -179,9 +225,40 @@ must display the words "Powered by eyeos" and retain the original copyright noti
             <input id="logActive" type="checkbox" value="Log">Log
             <div id="debugInfo" style="background-color: white"></div>
         </div>
-        <div id="integrationBenchmark"  style="" width=100% height=100%>
+		<div id="integrationBenchmark"  style="display:none" width=100% height=100%>
             <div class="closeButton" onclick="closeIntegrationBenchmark();">X</div>
             <button id="launchWordButton"  type="button" onclick=startBenchmark()>Start benchmark</button>
         </div>
+		<!-- keyboard shortcuts dropdown -->
+		<div class="dropdown" id="shortcuts">
+			<span class="btn btn-primary">atalhos</span>
+			<div class="dropdown-content" id="toolbar">
+					<a  class="btn btn-link" id="ctrlaltdel" href='javascript:sendCtrlAltDel();'>Ctrl-Alt-Del</a>
+					<a class="btn btn-link" id="ctrlaltf1" href='javascript:switchVT(1);'>Ctrl-Alt-F1</a>
+					<a class="btn btn-link" id="ctrlaltf2" href='javascript:switchVT(2);'>Ctrl-Alt-F2</a>
+					<a class="btn btn-link" id="ctrlaltf3" href='javascript:switchVT(3);'>Ctrl-Alt-F3</a>
+					<a class="btn btn-link" id="ctrlaltf4" href='javascript:switchVT(4);'>Ctrl-Alt-F4</a>
+					<a class="btn btn-link" id="ctrlaltf5" href='javascript:switchVT(5);'>Ctrl-Alt-F5</a>
+					<a class="btn btn-link" id="ctrlaltf6" href='javascript:switchVT(6);'>Ctrl-Alt-F6</a>
+					<a class="btn btn-link" id="ctrlaltf7" href='javascript:switchVT(7);'>Ctrl-Alt-F7</a>
+					<a class="btn btn-link" id="ctrlaltf8" href='javascript:switchVT(8);'>Ctrl-Alt-F8</a>
+					<a class="btn btn-link" id="ctrlaltf9" href='javascript:switchVT(9);'>Ctrl-Alt-F9</a>
+					<a class="btn btn-link" id="ctrlaltf10" href='javascript:switchVT(10);'>Ctrl-Alt-F10</a>
+					<a class="btn btn-link" id="ctrlaltf11" href='javascript:switchVT(11);'>Ctrl-Alt-F11</a>
+					<a class="btn btn-link" id="ctrlaltf12" href='javascript:switchVT(12);'>Ctrl-Alt-F12</a>
+			</div>
+		</div>
+
+		<!-- keyboard layout dropdown -->
+		<div class="dropdown" id="layouts">
+			<span class="btn btn-primary">mapa de teclado</span>
+			<div class="dropdown-content" id="toolbar">
+					<a  class="btn btn-link" id="pt-BR" href='javascript:switchKB("ptBR");'>pt_BR</a>
+					<a class="btn btn-link" id="us" href='javascript:switchKB("us");'>us</a>
+					<a class="btn btn-link" id="es" href='javascript:switchKB("es");'>es</a>
+					<a class="btn btn-link" id="it" href='javascript:switchKB("it");'>it</a>
+					<a class="btn btn-link" id="ct" href='javascript:switchKB("ct");'>ct</a>
+			</div>
+		</div>
     </body>
 </html>

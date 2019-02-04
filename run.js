@@ -74,11 +74,11 @@ function start () {
 			$(params.eventLayer).remove();
 		} else if (action == 'windowMoved') {
 			$(params.canvas).css({
-				'top': params.info.top + 'px',
+				'top': '0px',
 				'left': params.info.left + 'px'
 			});
 			$(params.eventLayer).css({
-				'top': params.info.top + 'px',
+				'top': '0px',
 				'left': params.info.left + 'px'
 			});
 		} else if (action == 'init' || action == 'windowCreated') {
@@ -93,11 +93,11 @@ function start () {
 				canvas = $(item.canvas).css({
 					'zIndex': 10000 - position - 1,
 					'position': 'absolute',
-					'top': item.info.top + 'px',
+					'top': '0px',
 					'left': item.info.left + 'px'
 				});
 				eventlayer = $(item.eventLayer).css({
-					'top': item.info.top + 'px',
+					'top': '0px',
 					'left': item.info.left + 'px',
 					'zIndex': 10000 - position
 				})
@@ -106,7 +106,7 @@ function start () {
 			}
 		} else if (action == 'ready') {
 			var width = $(window).width();
-			var height = $(window).height();
+			var height = $(window).height()-40;
 
 			// launch tests
 			if (performanceTest) {
@@ -137,11 +137,11 @@ function start () {
 			$(params.eventLayer).css({'display': 'none'});
 		} else if (action == 'windowMaximized') {
 			$(params.canvas).css({
-				'top': params.info.top + 'px',
+				'top': '0px',
 				'left': params.info.left + 'px'
 			});
 			$(params.eventLayer).css({
-				'top': params.info.top + 'px',
+				'top': '0px',
 				'left': params.info.left + 'px'
 			});
 		} else if (action == 'windowRestored') {
@@ -149,11 +149,11 @@ function start () {
 			$(params.canvas).css({'display': 'block'});
 			$(params.eventLayer).css({'display': 'block'});
 			$(params.canvas).css({
-				'top': params.info.top + 'px',
+				'top': '0px',
 				'left': params.info.left + 'px'
 			});
 			$(params.eventLayer).css({
-				'top': params.info.top + 'px',
+				'top': '0px',
 				'left': params.info.left + 'px'
 			});
 		} else if (action == 'windowFocused') {
@@ -193,7 +193,11 @@ function start () {
 	$(window)['resize'](function () {
 		app.sendCommand('setResolution', {
 			'width': $(window).width(),
-			'height': $(window).height()
+			'height': $(window).height()-40
+		});
+		$(params.canvas).css({
+				'top': '0px',
+				'left': params.info.left + 'px'
 		});
 	});
 
@@ -208,8 +212,8 @@ function start () {
 	app.run({
 		'callback': f,
 		'context': this,
-		'host': getURLParameter('host') || '10.11.12.100',
-		'port': getURLParameter('port') || 8000,
+		'host': getURLParameter('host') || '172.18.88.44',
+		'port': getURLParameter('port') || 15900,
 		'protocol': getURLParameter('protocol') || 'ws',
 		'token': '1q2w3e4r',
 		'vmHost': getURLParameter('vmhost') || false,
@@ -225,7 +229,7 @@ function start () {
         'heartbeatToken': 'heartbeat',
 		'heartbeatTimeout': 4000,//miliseconds
 		'busFileServerBaseUrl': 'https://10.11.12.200/fileserver/',
-		'layout': 'es',
+		'layout': 'ptbr',
 		'clientOffset': {
 			'x': 0,
 			'y': 0
