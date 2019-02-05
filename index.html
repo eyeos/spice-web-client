@@ -122,14 +122,15 @@
 		<script src="application/WorkerProcess.js"></script>
 		<script src="run.js"></script>
 		<script src="lib/sendkey.js"></script>
+		<script src="lib/status.js"></script>
 		<!-- end core -->
 		<meta content="yes" name="apple-mobile-web-app-capable" />
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 		<style type="text/css">
 body {
-	background-color:black;
+	background-color:rgba(0, 56, 168, 0.2);
 	padding:0;
 	margin:0;
 }
@@ -172,19 +173,20 @@ body {
 	    }
 
 	    .dropdown {
-		    position: absolute;
 		    display: inline-block;
 	    }
 
+	    #actions.dropdown {
+		    bottom:0px;
+	    }
+
 	    #shortcuts.dropdown {
-	            bottom:0px;
-	            left:180px;
+		    bottom:0px;
 	    }
 
 	    #layouts.dropdown {
-	            bottom:0px;
-	            left:0px;
-	     }
+		    bottom:0px;
+	    }
 
 	    .dropdown-content {
 		    display: none;
@@ -199,23 +201,41 @@ body {
 	    }
 	    .dropdown:hover .dropdown-content {
 		    display: block;
-	            bottom:100%;
+		    bottom:100%;
 	    }
 
-	    #shortcuts.dropdown:hover #shortcuts.dropdown-content {
-	            left: -20%;
+	    #shortcuts.dropdown:hover #shortcut_toolbar.dropdown-content {
 		    min-width: 120px;
 	    }
 
-	    #layouts.dropdown:hover #layouts.dropdown-content {
-		    left: -50%;
+	    #layouts.dropdown:hover #layout_toolbar.dropdown-content {
 		    min-width: 80px;
 	    }
 
-	    
+	    #actions.dropdown:hover #action_toolbar.dropdown-content {
+		    min-width: 80px;
+	    }
+
+	    #toolbar {
+		    position:fixed;
+		    bottom:0px;
+	    }
+
+	    #titletext {
+		    margin-left:1rem;
+		    margin-right:1rem;
+		    margin-top:1rem;
+		    margin-bottom:1rem;
+
+	    }
+	    #logo {
+		    height: 32px;
+		    width: auto;
+	    }
+
 		</style>
 	</head>
-	<body>
+	<body onLoad="javascript:addDynamicContent();">
 		<div id="testVdi"></div>
 		<input type="button" value="getStats" style="display:none;position:absolute;top:0px;right:0px;z-index:100;width:200px;height:200px;" id="getStats" />
 		<input type="text" id="hiddeninput" style="display:none;opacity:0;font-size: 60px;color:transparent"/>
@@ -229,10 +249,12 @@ body {
 			<div class="closeButton" onclick="closeIntegrationBenchmark();">X</div>
 			<button id="launchWordButton"  type="button" onclick=startBenchmark()>Start benchmark</button>
 		</div>
-		<!-- keyboard shortcuts dropdown -->
-		<div class="dropdown" id="shortcuts">
-			<span class="btn btn-primary">atalhos</span>
-			<div class="dropdown-content" id="toolbar">
+		<div class="toolbar" id="toolbar">
+			<img src="resources/logo.png" class="img-thumbnail" id="logo">&nbsp;<a class="lead" id="titletext" href="/labvirtual" target="_blank">Laboratório Virtual</a>
+			<!-- keyboard shortcuts dropdown -->
+			<div class="dropdown" id="shortcuts">
+				<span class="btn btn-primary">atalhos</span><span class="glyphicon glyphicon-hand-up"></span>
+				<div class="dropdown-content" id="shortcut_toolbar">
 					<a  class="btn btn-link" id="ctrlaltdel" href='javascript:sendCtrlAltDel();'>Ctrl-Alt-Del</a>
 					<a class="btn btn-link" id="ctrlaltf1" href='javascript:switchVT(1);'>Ctrl-Alt-F1</a>
 					<a class="btn btn-link" id="ctrlaltf2" href='javascript:switchVT(2);'>Ctrl-Alt-F2</a>
@@ -246,19 +268,28 @@ body {
 					<a class="btn btn-link" id="ctrlaltf10" href='javascript:switchVT(10);'>Ctrl-Alt-F10</a>
 					<a class="btn btn-link" id="ctrlaltf11" href='javascript:switchVT(11);'>Ctrl-Alt-F11</a>
 					<a class="btn btn-link" id="ctrlaltf12" href='javascript:switchVT(12);'>Ctrl-Alt-F12</a>
+				</div>
 			</div>
-		</div>
 
-		<!-- keyboard layout dropdown -->
-		<div class="dropdown" id="layouts">
-			<span class="btn btn-primary">mapa de teclado</span>
-			<div class="dropdown-content" id="toolbar">
+			<!-- keyboard layout dropdown -->
+			<div class="dropdown" id="layouts">
+				<span class="btn btn-primary">mapa de teclado <span class="glyphicon glyphicon-text-size"></span></span>
+				<div class="dropdown-content" id="layout_toolbar">
 					<a  class="btn btn-link" id="pt-BR" href='javascript:switchKB("ptBR");'>pt_BR</a>
 					<a class="btn btn-link" id="us" href='javascript:switchKB("us");'>us</a>
 					<a class="btn btn-link" id="es" href='javascript:switchKB("es");'>es</a>
 					<a class="btn btn-link" id="it" href='javascript:switchKB("it");'>it</a>
 					<a class="btn btn-link" id="ct" href='javascript:switchKB("ct");'>ct</a>
+				</div>
 			</div>
+
+			<!-- actions dropdown -->
+			<div class="dropdown" id="actions">
+				<span class="btn btn-primary">a&ccedil;&otilde;es <span class="glyphicon glyphicon-cog"></span></span>
+				<div class="dropdown-content" id="action_toolbar">
+				</div>
+			</div>
+
 		</div>
 	</body>
 </html>
