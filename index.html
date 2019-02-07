@@ -129,11 +129,11 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 		<style type="text/css">
-body {
-	background-color:rgba(0, 56, 168, 0.2);
-	padding:0;
-	margin:0;
-}
+		body {
+			background-color:black;
+			padding:0;
+			margin:0;
+		}
 
 	    #integrationBenchmark {
 		    display: none;
@@ -217,8 +217,10 @@ body {
 	    }
 
 	    #toolbar {
+		    background-color:#5073c3;
 		    position:fixed;
 		    bottom:0px;
+	            width:100%;
 	    }
 
 	    #titletext {
@@ -250,7 +252,7 @@ body {
 			<button id="launchWordButton"  type="button" onclick=startBenchmark()>Start benchmark</button>
 		</div>
 		<div class="toolbar" id="toolbar">
-			<img src="resources/logo.png" class="img-thumbnail" id="logo">&nbsp;<a class="lead" id="titletext" href="/labvirtual" target="_blank">Laboratório Virtual</a>
+			<img src="resources/logo.png" class="img-thumbnail" id="logo">&nbsp;<a class="lead h1" id="titletext" href="/labvirtual" target="_blank">Laboratório Virtual</a>
 			<!-- keyboard shortcuts dropdown -->
 			<div class="dropdown" id="shortcuts">
 				<span class="btn btn-primary">atalhos</span><span class="glyphicon glyphicon-hand-up"></span>
