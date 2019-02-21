@@ -72,7 +72,7 @@ wdi.Socket = $.spcExtend(wdi.EventObject.prototype, {
 			self.status = wdi.socketStatus.disconnected;
 			console.warn('Spice Web Client: ', e.code, e.reason);
 			self.disconnect();
-			self.fire('error', e);
+			self.fire('close', e);
 		};
 		this.websocket.onerror = function(e) {
 			self.status = wdi.socketStatus.failed;
