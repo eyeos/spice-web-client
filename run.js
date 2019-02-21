@@ -162,7 +162,7 @@ function start () {
 			wdi.Debug.log('Detected time lapse of ', params, 'seconds');
 		} else if (action == 'error') {
 //                      alert('error');
-		} else if ("checkResults") {
+		} else if (action == "checkResults") {
 			var cnv = $('#canvas_0')[0];
 			var ctx = cnv.getContext('2d');
 			var currentImgData = ctx.getImageData(0, 0, cnv.width, cnv.height);
