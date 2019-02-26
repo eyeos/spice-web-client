@@ -120,9 +120,9 @@ wdi.KeymapPTBR = function() {
 	charmapPTBR[';']   = [[0x2A, 0, 0, 0], [0x33, 0, 0, 0], [0xB3, 0, 0, 0], [0xAA, 0, 0, 0]];
 	charmapPTBR[':']   = [[0x2A, 0, 0, 0], [0x34, 0, 0, 0], [0xB4, 0, 0, 0], [0xAA, 0, 0, 0]];
 
-	charmapPTBR['?']   = [[0x2A, 0, 0, 0], [0x97, 0, 0, 0], [0x117, 0, 0, 0], [0xAA, 0, 0, 0]];
-	charmapPTBR['/']   = [[0x35, 0, 0, 0], [0xB5, 0, 0, 0]];
-	charmapPTBR['°']   = [[0xE0, 0x38, 0, 0], [0x97, 0, 0, 0], [0x117, 0, 0, 0], [0xE0, 0xB8, 0, 0]];
+	charmapPTBR['?']   = [[0x2A, 0, 0, 0], [0x0C, 0, 0, 0], [0x8C, 0, 0, 0], [0xAA, 0, 0, 0]];
+	charmapPTBR['/']   = [[0x2A, 0, 0, 0], [0x8, 0, 0, 0], [0x88, 0, 0, 0], [0xAA, 0, 0, 0]];
+	charmapPTBR['°']   = [[0xE0, 0x38, 0, 0], [0x62, 0, 0, 0], [0xE2, 0, 0, 0], [0xE0, 0xB8, 0, 0]];
 
 	// quinta fileira
 	charmapPTBR[' ']   = [[0x39, 0, 0, 0], [0xB9, 0, 0, 0]];
@@ -173,10 +173,7 @@ wdi.KeymapPTBR = function() {
 	keymapPTBR[106]                 = 0x37; // KP_MULTIPLY
 	keymapPTBR[109]                 = 0x4A; // KP_SUBTRACT
 	keymapPTBR[107]                 = 0x4E; // KP_ADD
-	keymapPTBR[111]                	= 0x35; // KP_DIVIDE
 
-	//keymapPTBR[220]                = 0x94; // OEM_102 (backslash and pipe)
-	keymapPTBR[191]                = 0x35; // OEM_2 (: ;)
 	keymapPTBR[189]                = 0x0C; // OEM_MINUS
 	keymapPTBR[187]                = 0x0D; // OEM_PLUS
 	keymapPTBR[219]                = 0x1A; // OEM_4 (grave and acute)
@@ -187,8 +184,11 @@ wdi.KeymapPTBR = function() {
 	keymapPTBR[192]                = 0x29; // OEM_3 (' ")
 	keymapPTBR[188]                = 0x33; // OEM_COMMA (< ,)
 	keymapPTBR[190]                = 0x34; // OEM_PERIOD (> .)
-	//keymapPTBR[226]                = 0xC1; // ABNT_C1 (? /)
-	keymapPTBR[226]                = 0x35; // ABNT_C1 (? /)
+
+	// went thru hell to find the correct codes for these! -- see the docs at http://www.quadibloc.com/comp/scan.htm, referenced as "INT 1" and "INT 3) (grr...)
+	keymapPTBR[220]                = 0x56; // backslash and pipe
+	keymapPTBR[191]                = 0x73; // slash and interrogation mark
+	keymapPTBR[111]                	= 0x73; // KP_DIVIDE -- this won't work at all. Remapped to INT 3.
 
 	// combination keys with ctrl
 	var ctrlKeymapPTBR = [];
