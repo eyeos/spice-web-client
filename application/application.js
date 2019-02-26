@@ -383,7 +383,6 @@ Application = $.spcExtend(wdi.DomainObject, {
 		this.busConnection.disconnect();
 		this.spiceConnection.disconnect();
 	},
-
     setMultimediaTime: function (time) {
         this.multimediaTime = time;
         this.lastMultimediaTime = Date.now();
@@ -443,6 +442,88 @@ Application = $.spcExtend(wdi.DomainObject, {
 
             ], "keyup"); //ctrl up
         }
+
+
+
+        if(shortcut == 'CtrlAltDel') {
+            this.inputProcess.send([
+                "keydown",
+                [
+                    {
+                        'generated': true,
+                        'type': "keydown",
+                        'keyCode': 17,
+                        'charCode': 0
+                    }
+                ]
+
+            ], "keydown"); //ctrl
+
+            this.inputProcess.send([
+                "keydown",
+                [
+                    {
+                        'generated': true,
+                        'type': "keydown",
+                        'keyCode': 18,
+                        'charCode': 0
+                    }
+                ]
+
+            ], "keydown"); //alt
+
+            this.inputProcess.send([
+                "keydown",
+                [
+                    {
+                        'generated': true,
+                        'type': "keydown",
+                        'keyCode': 46,
+                        'charCode': 0
+                    }
+                ]
+
+            ], "keydown"); //del
+
+            this.inputProcess.send([
+                "keyup",
+                [
+                    {
+                        'generated': true,
+                        'type': "keyup",
+                        'keyCode': 17,
+                        'charCode': 0
+                    }
+                ]
+
+            ], "keyup"); //ctrl up
+            this.inputProcess.send([
+                "keyup",
+                [
+                    {
+                        'generated': true,
+                        'type': "keyup",
+                        'keyCode': 18,
+                        'charCode': 0
+                    }
+                ]
+
+            ], "keyup"); //alt up
+            this.inputProcess.send([
+                "keyup",
+                [
+                    {
+                        'generated': true,
+                        'type': "keyup",
+                        'keyCode': 46,
+                        'charCode': 0
+                    }
+                ]
+
+            ], "keyup"); //del up
+
+        }
+
     },
 
 	dispose: function () {
