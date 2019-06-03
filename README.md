@@ -91,7 +91,7 @@ Spice web client has a very good performance connecting to remote windows sessio
 
 ##More information
 
-For more information about the implementation or questions about roadmap etc contact Jose Carlos Norte (jcarlosn) at jose@eyeos.com
+For more information about the implementation or questions about roadmap etc contact Jose Carlos Norte (jcarlosn) at jcarlos.norte@gmail.com
 
 ##License
 
