@@ -11,7 +11,7 @@ NOTE: This project is NOT based on the spice-html5 prototype.
 
 - Full QXL Support of the entire spice protocol, including clipping, masking, scaling etc (accelerated mode)
 - Audio support, but only for raw audio samples, not for celt
-- Full KeyBoard support including English, Spanish and Catalan layouts
+- Full KeyBoard support including English, Spanish, Catalan, Italian and German layouts
 - Clipboard sharing support with customizble interface
 - Video streaming support with excellent performance even at 60fps FHD 1080p
 - Extremly high performant LZ decoder with sub <10ms for a FHD 1080P image
